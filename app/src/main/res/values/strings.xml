@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ProjectTravel</string>
+    <string name="bottom_home">Home</string>
+    <string name="bottom_favorite">Favorite</string>
+    <string name="bottom_account">Account</string>
+    <string name="bottom_schedule">Schedule</string>
+    <string name="bottom_booking">Booking</string>
+</resources>

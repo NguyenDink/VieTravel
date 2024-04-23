@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="xanh_nhat_background">#072B60</color>
+    <color name="xanh_chu_de">#2d82b5</color>
+</resources>
