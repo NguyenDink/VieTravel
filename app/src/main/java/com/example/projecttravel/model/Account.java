@@ -1,15 +1,15 @@
 package com.example.projecttravel.model;
 
 public class Account {
-    private int account_id;
+    private String account_id;
     private String email;
     private String password;
     private String firstName;
     private String lastName;
     private int gender;
     private String phone;
-    private Role role;
-    public Account(int account_id, String email, String password, String firstName, String lastName, int gender, String phone, Role role) {
+    private int role_id;
+    public Account(String account_id, String email, String password, String firstName, String lastName, int gender, String phone, int role_id) {
         this.account_id = account_id;
         this.email = email;
         this.password = password;
@@ -17,7 +17,7 @@ public class Account {
         this.lastName = lastName;
         this.gender = gender;
         this.phone = phone;
-        this.role = role;
+        this.role_id = role_id;
     }
 
     public Account(String email, String password) {
@@ -29,11 +29,11 @@ public class Account {
         super();
     }
 
-    public int getAccount_id() {
+    public String getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(int account_id) {
+    public void setAccount_id(String account_id) {
         this.account_id = account_id;
     }
 
@@ -85,12 +85,12 @@ public class Account {
         this.phone = phone;
     }
 
-    public Role getRole() {
-        return role;
+    public int getRole() {
+        return role_id;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(int role_id) {
+        this.role_id = role_id;
     }
 
 }
