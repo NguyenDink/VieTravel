@@ -1,10 +1,12 @@
 package com.example.projecttravel.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projecttravel.R;
+import com.example.projecttravel.activity.ListAllLocation;
 import com.example.projecttravel.adapter.LocationAdapter;
 import com.example.projecttravel.adapter.LocationTypeAdapter;
 import com.example.projecttravel.model.Location;
@@ -29,6 +32,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private View mView;
+    private TextView txtTatCaDD;
     private RecyclerView rViewLocation, rViewLocationType;
     private LocationAdapter locationAdapter;
     private LocationTypeAdapter locationTypeAdapter;
@@ -42,10 +46,23 @@ public class HomeFragment extends Fragment {
         initUI();
         getListLocation();
         getListLocationType();
+        initListener();
         return mView;
     }
 
+    private void initListener() {
+        txtTatCaDD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ListAllLocation.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     public void initUI() {
+        txtTatCaDD = mView.findViewById(R.id.xemTatCaDD);
+
         rViewLocation = mView.findViewById(R.id.rView_location);
         rViewLocationType = mView.findViewById(R.id.rView_LocationType);
 
@@ -55,7 +72,7 @@ public class HomeFragment extends Fragment {
         rViewLocationType.setLayoutManager(linearLayoutManagerType);
 
         listLocation = new ArrayList<>();
-        locationAdapter = new LocationAdapter(listLocation);
+        locationAdapter = new LocationAdapter(listLocation, R.layout.viewholder_location);
 
         listLocationType = new ArrayList<>();
         locationTypeAdapter = new LocationTypeAdapter(listLocationType);

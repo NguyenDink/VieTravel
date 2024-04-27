@@ -23,14 +23,16 @@ import java.util.List;
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder>{
     private List<Location> items;
 
-    public LocationAdapter(List<Location> items) {
+    private int resource;
+    public LocationAdapter(List<Location> items, int resource) {
         this.items = items;
+        this.resource = resource;
     }
 
     @NonNull
     @Override
     public LocationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_location, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(this.resource, parent, false);
         return new ViewHolder(inflate);
     }
 

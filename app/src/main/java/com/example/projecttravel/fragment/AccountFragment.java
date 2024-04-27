@@ -58,7 +58,6 @@ public class AccountFragment extends Fragment {
         imgAvata = mView.findViewById(R.id.imgAvatar);
 
         setUserInfo();
-        updateImage();
 
         txtLogout.setOnClickListener(new View.OnClickListener() {
             @Override
