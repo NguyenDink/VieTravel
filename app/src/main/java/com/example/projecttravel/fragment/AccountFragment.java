@@ -28,8 +28,10 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.projecttravel.R;
+import com.example.projecttravel.activity.DetailAccount;
 import com.example.projecttravel.activity.Home;
 import com.example.projecttravel.activity.Login;
+import com.example.projecttravel.dao.AccountDB;
 import com.example.projecttravel.model.Account;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,21 +46,20 @@ public class AccountFragment extends Fragment {
     private View mView;
     private TextView txtLogout, txtTen, txtThongTin, txtDoiMK, txtDoiTac, txtQuanLyKS;
     private ImageView imgAvata;
-
+    AccountDB accountDB = new AccountDB();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_account, container, false);
-        txtLogout = mView.findViewById(R.id.txtLogout);
-        txtTen = mView.findViewById(R.id.txtTen);
-        txtThongTin = mView.findViewById(R.id.txtThongTin);
-        txtDoiMK = mView.findViewById(R.id.txtDoiMK);
-        txtDoiTac = mView.findViewById(R.id.txtDoiTac);
-        txtQuanLyKS = mView.findViewById(R.id.txtQuanLyKS);
-        imgAvata = mView.findViewById(R.id.imgAvatar);
 
+        initUI();
         setUserInfo();
+        initLinsenter();
 
+        return mView;
+    }
+
+    private void initLinsenter() {
         txtLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,14 +70,30 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        txtThongTin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetailAccount.class);
+                startActivity(intent);
+            }
+        });
+
         imgAvata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateImage();
             }
         });
+    }
 
-        return mView;
+    private void initUI() {
+        txtLogout = mView.findViewById(R.id.txtLogout);
+        txtTen = mView.findViewById(R.id.txtTen);
+        txtThongTin = mView.findViewById(R.id.txtThongTin);
+        txtDoiMK = mView.findViewById(R.id.txtDoiMK);
+        txtDoiTac = mView.findViewById(R.id.txtDoiTac);
+        txtQuanLyKS = mView.findViewById(R.id.txtQuanLyKS);
+        imgAvata = mView.findViewById(R.id.imgAvatar);
     }
 
     public void updateImage() {
@@ -102,34 +119,15 @@ public class AccountFragment extends Fragment {
     }
 
     public void setUserInfo() {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        String uid = currentUser.getUid();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Glide.with(getActivity()).load(currentUser.getPhotoUrl()).error(R.drawable.ic_account_circle).into(imgAvata);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Account");
-
-        myRef.orderByChild("account_id").equalTo(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        accountDB.getCurrentAccount(new AccountDB.CurrentAccountCallBack() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Account account = dataSnapshot.getValue(Account.class);
-                        if (account != null) {
-                            String firstName = account.getFirstName().trim();
-                            String lastName = account.getLastName().trim();
-                            txtTen.setText(lastName + " " + firstName);
-                        }
-                    }
-                } else {
-                    // Không tìm thấy thông tin tài khoản
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Xử lý lỗi nếu có
+            public void onCurrentAccount(Account currentAccount) {
+                String firstName = currentAccount.getFirstName().trim();
+                String lastName = currentAccount.getLastName().trim();
+                txtTen.setText(lastName + " " + firstName);
             }
         });
     }

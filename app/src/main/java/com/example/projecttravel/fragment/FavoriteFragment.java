@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import java.util.List;
 
 public class FavoriteFragment extends Fragment {
     private View mView;
+    private ImageView btnReload;
     private RecyclerView rViewFavorites;
     private LocationAdapter locationAdapter;
     private List<Location> listLocation;
@@ -39,6 +41,12 @@ public class FavoriteFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_favorite, container, false);
         initUI();
         getListLocation();
+        btnReload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getListLocation();
+            }
+        });
         return mView;
     }
 
@@ -57,6 +65,7 @@ public class FavoriteFragment extends Fragment {
 
     private void initUI() {
         rViewFavorites = mView.findViewById(R.id.rView_Favorites);
+        btnReload = mView.findViewById(R.id.btnReload);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rViewFavorites.setLayoutManager(linearLayoutManager);
         listLocation = new ArrayList<>();

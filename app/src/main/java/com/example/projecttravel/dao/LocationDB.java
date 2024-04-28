@@ -42,7 +42,7 @@ public class LocationDB {
     public void getFavoriteLocations(final FavoriteLocationsCallback callback) {
         final List<Location> favoriteLocations = new ArrayList<>();
         final AtomicInteger count = new AtomicInteger(0);
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
