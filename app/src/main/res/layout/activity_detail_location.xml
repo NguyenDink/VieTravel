@@ -51,7 +51,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/imgBack"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgBack"
-                    app:srcCompat="@drawable/fav" />
+                    app:srcCompat="@drawable/ic_favorite_do" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView

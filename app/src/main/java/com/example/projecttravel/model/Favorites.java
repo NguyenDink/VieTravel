@@ -3,40 +3,30 @@ package com.example.projecttravel.model;
 import java.util.List;
 
 public class Favorites {
-    private int favorites_id;
-    private Account account;
-    private List<Location> locations;
-
-    public Favorites(int favorites_id, Account account, List<Location> locations) {
-        this.favorites_id = favorites_id;
-        this.account = account;
-        this.locations = locations;
-    }
+    private String account_id;
+    private List<String> location_id;
 
     public Favorites() {
     }
 
-    public int getFavorites_id() {
-        return favorites_id;
+    public Favorites(String account_id, List<String> location_id) {
+        this.account_id = account_id;
+        this.location_id = location_id;
     }
 
-    public void setFavorites_id(int favorites_id) {
-        this.favorites_id = favorites_id;
+    public String getAccount_id() {
+        return account_id;
     }
 
-    public Account getAccount() {
-        return account;
+    public void setAccount_id(String account_id) {
+        this.account_id = account_id;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public List<String> getLocation_id() {
+        return location_id;
     }
 
-    public List<Location> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
+    public void setLocation_id(List<String> location_id) {
+        this.location_id = location_id;
     }
 }

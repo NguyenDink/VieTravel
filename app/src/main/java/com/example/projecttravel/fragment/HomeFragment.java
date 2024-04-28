@@ -88,6 +88,8 @@ public class HomeFragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (listLocation != null)
+                    listLocation.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Location location = dataSnapshot.getValue(Location.class);
                     listLocation.add(location);
@@ -109,6 +111,8 @@ public class HomeFragment extends Fragment {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (listLocationType != null)
+                    listLocationType.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     LocationType locationType = dataSnapshot.getValue(LocationType.class);
                     listLocationType.add(locationType);

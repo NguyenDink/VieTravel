@@ -15,11 +15,9 @@
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/view_pop"
+        android:id="@+id/rView_Favorites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp" />
+        android:clipToPadding="false"/>
 
 </LinearLayout>

@@ -31,9 +31,11 @@ public class Splash extends AppCompatActivity {
         if (user == null) {
             Intent intent = new Intent(this, Start.class);
             startActivity(intent);
+            finish();
         } else {
             Intent intent = new Intent(this, Home.class);
             startActivity(intent);
+            finish();
         }
         fileList();
     }

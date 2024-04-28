@@ -64,6 +64,8 @@ public class ListAllLocation extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (listLocation != null)
+                    listLocation.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Location location = dataSnapshot.getValue(Location.class);
                     listLocation.add(location);
