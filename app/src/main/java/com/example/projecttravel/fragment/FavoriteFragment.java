@@ -1,6 +1,7 @@
 package com.example.projecttravel.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +36,13 @@ public class FavoriteFragment extends Fragment {
     private LocationAdapter locationAdapter;
     private List<Location> listLocation;
     LocationDB locationDB = new LocationDB();
+    private ProgressDialog progressDialog;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_favorite, container, false);
         initUI();
+        progressDialog = new ProgressDialog(getActivity());
         getListLocation();
         btnReload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +54,7 @@ public class FavoriteFragment extends Fragment {
     }
 
     private void getListLocation() {
+        progressDialog.show();
         locationDB.getFavoriteLocations(new LocationDB.FavoriteLocationsCallback() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -58,6 +62,7 @@ public class FavoriteFragment extends Fragment {
                 listLocation.clear();
                 listLocation.addAll(favoriteLocations);
                 locationAdapter.notifyDataSetChanged();
+                progressDialog.dismiss();
             }
         });
     }

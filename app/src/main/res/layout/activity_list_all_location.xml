@@ -9,14 +9,15 @@
     tools:context=".activity.ListAllLocation">
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#bce6ff"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_arrow_back_24" />
@@ -30,6 +31,14 @@
             android:textColor="#365360"
             android:textSize="24sp" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#365360"
+        android:layout_below="@+id/ll"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rView_listLocation"

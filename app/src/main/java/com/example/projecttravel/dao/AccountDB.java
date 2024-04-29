@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.projecttravel.activity.Register;
+import com.example.projecttravel.activity.UpdateAccount;
 import com.example.projecttravel.model.Account;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,18 +61,19 @@ public class AccountDB {
         });
 
     }
-//    public void updateAccount(Account account, Context context, UpdateAccountCallback callback) {
-//        myRef.child(account.getAccount_id()).setValue(account, new DatabaseReference.CompletionListener() {
-//            @Override
-//            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                if (error == null) {
-//                    callback.onUpdateSuccess();
-//                } else {
-//                    callback.onUpdateFailure(error.getMessage());
-//                }
-//            }
-//        });
-//    }
+
+    public void updatePassword(String password, UpdateAccountCallback callback) {
+        myRef.child(account_id).child("password").setValue(password, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (error == null) {
+                    callback.onUpdateSuccess();
+                } else {
+                    callback.onUpdateFailure(error.getMessage());
+                }
+            }
+        });
+    }
 
     public interface UpdateAccountCallback {
         void onUpdateSuccess();

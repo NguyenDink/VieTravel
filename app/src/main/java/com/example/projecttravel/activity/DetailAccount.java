@@ -38,6 +38,8 @@ public class DetailAccount extends AppCompatActivity {
     }
 
     private void setVariable() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Glide.with(this).load(currentUser.getPhotoUrl()).error(R.drawable.ic_account_circle).into(imgAvatar);
         accountDB.getCurrentAccount(new AccountDB.CurrentAccountCallBack() {
             @Override
             public void onCurrentAccount(Account currentAccount) {

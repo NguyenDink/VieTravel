@@ -20,6 +20,7 @@
         android:textColorHint="@color/xanh_nhat_background"
         android:textSize="20sp" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

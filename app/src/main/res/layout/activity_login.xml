@@ -9,15 +9,15 @@
 
     <EditText
         android:id="@+id/edtEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="101dp"
         android:layout_marginTop="280dp"
         android:layout_marginEnd="101dp"
         android:background="@drawable/custom_edt"
-        android:hint=".........."
+        android:hint="email"
         android:inputType="text"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         android:textColorHint="#617CA3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
@@ -26,15 +26,15 @@
 
     <EditText
         android:id="@+id/edtMatKhau"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="101dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="101dp"
         android:background="@drawable/custom_edt"
-        android:hint="******"
+        android:hint="mật khẩu"
         android:inputType="text"
-        android:paddingLeft="20dp"
+        android:paddingLeft="10dp"
         android:textColorHint="#617CA3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
@@ -43,7 +43,7 @@
 
     <Button
         android:id="@+id/btnDangNhap"
-        android:layout_width="241dp"
+        android:layout_width="200dp"
         android:layout_height="48dp"
         android:layout_marginStart="101dp"
         android:layout_marginTop="44dp"
@@ -58,7 +58,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="70dp"
         android:layout_marginBottom="5dp"
         android:text="Email"
         android:textColor="@color/xanh_nhat_background"
@@ -70,7 +70,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="70dp"
         android:layout_marginBottom="5dp"
         android:text="Mật khẩu"
         android:textColor="@color/xanh_nhat_background"
@@ -146,6 +146,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo1" />
+        app:srcCompat="@drawable/splash" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

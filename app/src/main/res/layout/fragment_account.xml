@@ -7,9 +7,10 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/xanh_chu_de"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -36,13 +37,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text=""
-            android:textColor="#FEFEFE"
+            android:textColor="@color/xanh_nhat_background"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#365360"
+        android:layout_below="@+id/ll"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
