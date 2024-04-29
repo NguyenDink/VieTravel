@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.projecttravel.R;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class DetailAccount extends AppCompatActivity {
 
@@ -39,7 +42,19 @@ public class DetailAccount extends AppCompatActivity {
 
     private void setVariable() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Glide.with(this).load(currentUser.getPhotoUrl()).error(R.drawable.ic_account_circle).into(imgAvatar);
+        String account_id = currentUser.getUid();
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("avatars").child(account_id+".jpg");
+        storageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    // Xử lý khi lấy URL thành công
+                    String urlAvatar = uri.toString();
+                    Glide.with(this).load(urlAvatar).error(R.drawable.ic_account_circle).into(imgAvatar);
+                    // Sử dụng URL của ảnh ở đây
+                })
+                .addOnFailureListener(e -> {
+                    // Xử lý khi không thể lấy URL của ảnh
+                    Toast.makeText(DetailAccount.this,"Failed to get image URL from Firebase Storage: " + e.getMessage(),Toast.LENGTH_SHORT).show();
+                });
         accountDB.getCurrentAccount(new AccountDB.CurrentAccountCallBack() {
             @Override
             public void onCurrentAccount(Account currentAccount) {

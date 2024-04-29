@@ -19,7 +19,6 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -27,13 +26,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.projecttravel.R;
 import com.example.projecttravel.dao.AccountDB;
-import com.example.projecttravel.fragment.AccountFragment;
 import com.example.projecttravel.model.Account;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -48,6 +43,7 @@ public class UpdateAccount extends AppCompatActivity {
     private Uri mUri;
     private ProgressDialog progressDialog;
     AccountDB accountDB = new AccountDB();
+    private String urlAvatar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +79,7 @@ public class UpdateAccount extends AppCompatActivity {
                         @Override
                         public void onUpdateSuccess() {
                             Toast.makeText(UpdateAccount.this, "Cập nhật thông tin tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                            uploadImageToStorage(mUri);
 //                            if (mUri != null) {
 //                                FirebaseUser currrentUser = FirebaseAuth.getInstance().getCurrentUser();
 //                                if (currrentUser == null) {
@@ -117,8 +114,19 @@ public class UpdateAccount extends AppCompatActivity {
 
     private void setVariable() {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        mUri = currentUser.getPhotoUrl();
-        Glide.with(this).load(currentUser.getPhotoUrl()).error(R.drawable.ic_account_circle).into(imgAvatar);
+        String account_id = currentUser.getUid();
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("avatars").child(account_id+".jpg");
+        storageRef.getDownloadUrl()
+                .addOnSuccessListener(uri -> {
+                    // Xử lý khi lấy URL thành công
+                    urlAvatar = uri.toString();
+                    Glide.with(this).load(urlAvatar).error(R.drawable.ic_account_circle).into(imgAvatar);
+                    // Sử dụng URL của ảnh ở đây
+                })
+                .addOnFailureListener(e -> {
+                    // Xử lý khi không thể lấy URL của ảnh
+                    Toast.makeText(UpdateAccount.this,"Failed to get image URL from Firebase Storage: " + e.getMessage(),Toast.LENGTH_SHORT).show();
+                });
         accountDB.getCurrentAccount(new AccountDB.CurrentAccountCallBack() {
             @Override
             public void onCurrentAccount(Account currentAccount) {
@@ -186,7 +194,7 @@ public class UpdateAccount extends AppCompatActivity {
                     return;
                 }
                 Uri uri = intent.getData();
-//                mUri = uri;
+                mUri = uri;
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                     setBitmapImageView(bitmap);
@@ -197,21 +205,20 @@ public class UpdateAccount extends AppCompatActivity {
         }
     });
 
-//    public void uploadImageToStorage(Uri imageUri) {
-//        // Tạo một tham chiếu tới nơi bạn muốn lưu trữ ảnh trong Firebase Storage
-//        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("avatars").child("avatar.jpg");
-//        // Tải ảnh lên Storage
-//        storageRef.putFile(imageUri)
-//                .addOnSuccessListener(taskSnapshot -> {
-//                    // Nếu tải ảnh lên thành công, lấy URL của ảnh
-//                    storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-//                        // Lưu URL vào Realtime Database
-//                        saveImageUrlToDatabase(uri.toString());
-//                    });
-//                })
-//                .addOnFailureListener(e -> {
-//                    // Xử lý khi tải ảnh lên thất bại
-////                    Log.e("TAG", "Failed to upload image to Firebase Storage: " + e.getMessage());
-//                });
-//    }
+    public void uploadImageToStorage(Uri imageUri) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String account_id = currentUser.getUid();
+        // Tạo một tham chiếu tới nơi bạn muốn lưu trữ ảnh trong Firebase Storage
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("avatars").child(account_id+".jpg");
+        // Tải ảnh lên Storage
+        storageRef.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    Toast.makeText(UpdateAccount.this, "Upload image to Firebase Storage successful", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Xử lý khi tải ảnh lên thất bại
+                    Toast.makeText(UpdateAccount.this, "Failed to upload image to Firebase Storage: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
 }
