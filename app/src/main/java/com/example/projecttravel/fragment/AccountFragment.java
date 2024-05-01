@@ -16,6 +16,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,6 +37,7 @@ import com.example.projecttravel.activity.DetailAccount;
 import com.example.projecttravel.activity.Home;
 import com.example.projecttravel.activity.Login;
 import com.example.projecttravel.activity.MainActivity;
+import com.example.projecttravel.activity.ManageHotel;
 import com.example.projecttravel.activity.UpdateAccount;
 import com.example.projecttravel.dao.AccountDB;
 import com.example.projecttravel.model.Account;
@@ -95,6 +98,43 @@ public class AccountFragment extends Fragment {
                 changePassword();
             }
         });
+
+        txtDoiTac.setOnClickListener(new View.OnClickListener() {
+            int role;
+            @Override
+            public void onClick(View v) {
+                accountDB = new AccountDB();
+                accountDB.getCurrentAccount(new AccountDB.CurrentAccountCallBack() {
+                    @Override
+                    public void onCurrentAccount(Account currentAccount) {
+                        role = currentAccount.getRole();
+                    }
+                });
+                if (role == 2) {
+                    Toast.makeText(getActivity(), "Hiện bạn đang là đối tác với VieTravel", Toast.LENGTH_SHORT).show();
+                } else
+                    becomePartner();
+            }
+        });
+
+        txtQuanLyKS.setOnClickListener(new View.OnClickListener() {
+            int role;
+            @Override
+            public void onClick(View v) {
+                accountDB = new AccountDB();
+                accountDB.getCurrentAccount(new AccountDB.CurrentAccountCallBack() {
+                    @Override
+                    public void onCurrentAccount(Account currentAccount) {
+                        role = currentAccount.getRole();
+                    }
+                });
+                if (role == 2) {
+                    Intent intent = new Intent(getActivity(), ManageHotel.class);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(getActivity(), "Vui lòng trở thành đối tác với VieTravel", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initUI() {
@@ -133,6 +173,46 @@ public class AccountFragment extends Fragment {
         });
     }
 
+    public void becomePartner() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_become_partner, null);
+        Button btnAgree = dialogView.findViewById(R.id.btnReset);
+        Button btnCancel = dialogView.findViewById(R.id.btnCancel);
+        CheckBox checkAgree = dialogView.findViewById(R.id.checkAgree);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnAgree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkAgree.isChecked()) {
+                    accountDB.updateRole(2, new AccountDB.UpdateAccountCallback() {
+                        @Override
+                        public void onUpdateSuccess() {
+                            dialog.dismiss();
+                            Toast.makeText(requireContext(), "Chào mừng bạn trở thành đối tác của VieTravel", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onUpdateFailure(String errorMessage) {
+                            Toast.makeText(requireContext(), "Lỗi khi cập nhật quyền người dùng: " + errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(requireContext(), "Vui lòng đồng ý với Chính sách và Điều khoản của VieTravel", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     public void changePassword() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_change_password, null);
@@ -155,9 +235,6 @@ public class AccountFragment extends Fragment {
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
-                    // Lấy user ID của người dùng đang đăng nhập
-                    String userID = user.getUid();
-
                     AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), oldPassword);
                     // Xác thực lại người dùng với mật khẩu cũ
                     user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {

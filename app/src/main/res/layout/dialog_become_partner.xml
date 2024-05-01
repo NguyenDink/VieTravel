@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="20dp"
+    android:id="@+id/dialogForgot"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/forgotTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_round"
+        android:drawableLeft="@drawable/ic_diversity"
+        android:drawablePadding="8dp"
+        android:padding="10dp"
+        android:text="Trở thành đối tác"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="Chính sách và điều khoản:"
+            android:textColor="@color/xanh_nhat_background"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/forgotTitle" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/desc">
+
+            <TextView
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="30dp"
+                android:text="1. Đăng Ký Đối Tác:\n
+    - Bằng cách đăng ký trở thành đối tác của chúng tôi, bạn đồng ý cung cấp thông tin chính xác và đầy đủ về khách sạn của mình.\n
+    - Chúng tôi có quyền từ chối hoặc hủy bỏ bất kỳ đăng ký đối tác nào nếu phát hiện thông tin không chính xác hoặc vi phạm các điều khoản của chúng tôi.\n\n
+2. Quyền và Nghĩa Vụ của Đối Tác:\n
+    - Bằng cách trở thành đối tác, bạn đồng ý chịu trách nhiệm về tính chính xác và hiệu quả của thông tin về khách sạn trên ứng dụng của chúng tôi.\n
+    - Bạn đồng ý cập nhật thông tin về khách sạn định kỳ để đảm bảo sự hiện diện và tin cậy trên nền tảng của chúng tôi.\n\n
+3. Chính Sách Thanh Toán và Hủy Đặt Phòng:\n
+    - Chúng tôi sẽ thực hiện thanh toán cho các đặt phòng được thực hiện thông qua ứng dụng của chúng tôi theo thỏa thuận trước đó với đối tác.\n
+    - Đối tác cần tuân thủ chính sách hủy đặt phòng được quy định trên nền tảng của chúng tôi và cung cấp thông tin rõ ràng cho khách hàng.\n\n
+4. Chính Sách Bảo Mật:\n
+    - Chúng tôi cam kết bảo vệ thông tin cá nhân của đối tác và khách hàng theo Chính Sách Bảo Mật của chúng tôi.\n
+    - Thông tin về khách sạn và giao dịch sẽ được bảo mật và chỉ sử dụng cho mục đích du lịch.\n\nBằng cách trở thành đối tác của chúng tôi, bạn hiểu và đồng ý tuân thủ các điều khoản và chính sách trên. Chúng tôi rất vui mừng được hợp tác với bạn để cung cấp trải nghiệm du lịch tuyệt vời cho cộng đồng người dùng của chúng tôi!"
+                android:backgroundTint="@color/xanh_chu_de"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/forgotTitle" />
+
+        </ScrollView>
+
+        <CheckBox
+            android:id="@+id/checkAgree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="410dp"
+            android:text="Đồng ý"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="8dp"
+            android:text="Hủy"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:cornerRadius="20dp"
+            android:background="@drawable/dam_background"
+            app:backgroundTint="@null"
+
+            app:layout_constraintEnd_toStartOf="@id/btnReset"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollView" />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/dam_background"
+        android:text="Xác nhận"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:backgroundTint="@null"
+
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnCancel"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

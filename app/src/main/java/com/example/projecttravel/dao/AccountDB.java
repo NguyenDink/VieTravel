@@ -75,6 +75,19 @@ public class AccountDB {
         });
     }
 
+    public void updateRole(int role, UpdateAccountCallback callback) {
+        myRef.child(account_id).child("role").setValue(role, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (error == null) {
+                    callback.onUpdateSuccess();
+                } else {
+                    callback.onUpdateFailure(error.getMessage());
+                }
+            }
+        });
+    }
+
     public interface UpdateAccountCallback {
         void onUpdateSuccess();
         void onUpdateFailure(String errorMessage);

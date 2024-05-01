@@ -49,7 +49,6 @@ public class DetailAccount extends AppCompatActivity {
                     // Xử lý khi lấy URL thành công
                     String urlAvatar = uri.toString();
                     Glide.with(this).load(urlAvatar).error(R.drawable.ic_account_circle).into(imgAvatar);
-                    // Sử dụng URL của ảnh ở đây
                 })
                 .addOnFailureListener(e -> {
                     // Xử lý khi không thể lấy URL của ảnh
