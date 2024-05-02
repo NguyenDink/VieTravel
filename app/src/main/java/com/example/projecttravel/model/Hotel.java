@@ -1,8 +1,9 @@
 package com.example.projecttravel.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Hotel {
+public class Hotel implements Serializable {
     private int hotel_id;
     private int location_id;
     private String name;

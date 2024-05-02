@@ -2,6 +2,7 @@ package com.example.projecttravel.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -17,10 +18,12 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.projecttravel.R;
 import com.example.projecttravel.activity.DetailAccount;
+import com.example.projecttravel.activity.UpdateHotel;
 import com.example.projecttravel.model.Hotel;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +69,15 @@ public class HotelAdapter extends ArrayAdapter<Hotel> {
                     // Xử lý khi không thể lấy URL của ảnh
                     Toast.makeText(getContext(),"Failed to get image URL from Firebase Storage: " + e.getMessage(),Toast.LENGTH_SHORT).show();
                 });
+
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, UpdateHotel.class);
+//                intent.putExtra("object", hotel);
+//                context.startActivity(intent);
+//            }
+//        });
 
         return convertView;
     }

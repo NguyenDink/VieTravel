@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.UpdateHotel">
 
-    <TextView
-        android:id="@+id/textView13"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thêm Khách Sạn"
-        android:background="@drawable/blue_round"
-        android:drawableLeft="@drawable/ic_home_work"
-        android:drawablePadding="8dp"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:background="@drawable/blue_round">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_home_work"
+            android:drawablePadding="8dp"
+            android:padding="10dp"
+            android:text="Cập nhật thông tin"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_delete" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imgHotel"
@@ -51,12 +64,13 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtName"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
         </TableRow>
 
         <TableRow
@@ -70,10 +84,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spinLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txtLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
         </TableRow>
 
@@ -148,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text" />
+                android:inputType="number" />
         </TableRow>
 
         <TableRow
@@ -180,13 +196,13 @@
         android:paddingLeft="8dp"/>
 
     <Button
-        android:id="@+id/btnAddHotel"
+        android:id="@+id/btnUpdateHotel"
         android:layout_width="200dp"
         android:layout_height="44dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/dam_background"
-        android:text="Thêm"
+        android:text="Lưu"
         app:backgroundTint="@null" />
 
     <Button
@@ -199,6 +215,4 @@
         android:text="Hủy"
         android:textColor="@color/black"
         app:backgroundTint="@null" />
-
-
 </LinearLayout>

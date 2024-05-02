@@ -3,110 +3,123 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <ImageView
-        android:id="@+id/imgHotel"
-        android:layout_width="140dp"
-        android:layout_height="170dp"
-        app:srcCompat="@drawable/cat4" />
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="King TheLand"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="#0B406A"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/marker2"
-            android:drawablePadding="8dp"
-            android:text="Số 1 Võ Văn Ngân, Linh Trung, Thủ Đức"
-            android:textSize="18sp"
-            android:textStyle="italic" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/imgHotel"
+            android:layout_width="140dp"
+            android:layout_height="170dp"
+            android:layout_marginEnd="5dp"
+            app:srcCompat="@drawable/cat4" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="170dp"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView16"
-                android:layout_width="160dp"
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_people"
+                android:fontFamily="sans-serif"
+                android:text="King TheLand"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="#0B406A"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/marker2"
                 android:drawablePadding="8dp"
-                android:text="Số lượng người:"
+                android:text="Số 1 Võ Văn Ngân, Linh Trung, Thủ Đức"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_people"
+                    android:drawablePadding="8dp"
+                    android:text="Số lượng người:"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txtCapacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="8"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_star"
+                android:drawablePadding="8dp"
+                android:text="4.5"
                 android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/txtCapacity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:text="8"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_star"
-            android:drawablePadding="8dp"
-            android:text="4.5"
-            android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Giá:"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:text="1200000"
+                    android:textAlignment="textEnd"
+                    android:textAllCaps="false"
+                    android:textColor="#1A2E9F"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Giá:"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VNĐ"
+                    android:textColor="#1A2E9F"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txtPrice"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:text="1200000"
-                android:textAlignment="textEnd"
-                android:textAllCaps="false"
-                android:textColor="#1A2E9F"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VNĐ"
-                android:textColor="#1A2E9F"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#365360"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"/>
 </LinearLayout>

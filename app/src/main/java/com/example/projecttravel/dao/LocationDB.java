@@ -20,8 +20,8 @@ public class LocationDB {
         myRef = FirebaseDatabase.getInstance().getReference("Location");
     }
 
-    public void getLocationById(String locationId, final LocationCallback callback) {
-        myRef.child(locationId).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getLocationById(int locationId, final LocationCallback callback) {
+        myRef.child(locationId+"").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Location location = dataSnapshot.getValue(Location.class);

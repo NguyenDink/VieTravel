@@ -138,13 +138,31 @@
                 android:textColor="@color/black"
                 android:inputType="textMultiLine"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#365360"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="This 2 bed /1 bath home boasts an enormous,
-open-living plan, accented by striking
-architectural features and high-end finishes.
-Feel inspired by open sight lines that
-embrace the outdoors, crowned by stunning
-coffered ceilings. " />
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="20dp"
+                android:text="Khách sạn gần đây"
+                android:textColor="@color/xanh_nhat_background"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/lvHotel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>

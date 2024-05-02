@@ -121,9 +121,33 @@ public class AddHotel extends AppCompatActivity {
         });
 
         btnAddHotel.setOnClickListener(new View.OnClickListener() {
+            boolean isHotelAdded;
             @Override
             public void onClick(View v) {
-                addHotel();
+                isHotelAdded = false;
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                account_id = currentUser.getUid();
+
+                DatabaseReference hotel_id_ref = FirebaseDatabase.getInstance().getReference("Hotel_id");
+                hotel_id_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        hotel_id = snapshot.getValue(Integer.class);
+                        if (!isHotelAdded) {
+                            // Gọi phương thức addHotel() sau khi đã cập nhật hotel_id
+                            addHotel();
+                            // Đặt cờ là đã thêm hotel
+                            isHotelAdded = true;
+                            // Tăng hotel_id lên 1 và cập nhật lại lên Firebase
+                            hotel_id_ref.setValue(hotel_id + 1);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }
@@ -180,25 +204,11 @@ public class AddHotel extends AppCompatActivity {
     }
 
     public void addHotel() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        account_id = currentUser.getUid();
-
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Hotel_id");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-               hotel_id = snapshot.getValue(Integer.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         if ((edtName.getText().toString()).isEmpty() || (edtDescription.getText().toString()).isEmpty() ||
                 (edtAddress.getText().toString()).isEmpty() || (autoCompleteLocation.getText().toString()).isEmpty() || (edtPrice.getText().toString()).isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        } else if (mUri == null) {
+            Toast.makeText(this, "Vui lòng chọn hình ảnh cho khách sạn của bạn", Toast.LENGTH_SHORT).show();
         } else {
             name = edtName.getText().toString().trim();
             description = edtDescription.getText().toString().trim();
@@ -213,10 +223,7 @@ public class AddHotel extends AppCompatActivity {
             Hotel hotel = new Hotel(hotel_id, location_id, name, category_id, description, capacity, address, price, account_id);
             HotelDB hotelDB = new HotelDB();
             hotelDB.addHotel(this, hotel, hotel_id);
-            if (mUri != null)
-                uploadImageToStorage(mUri);
-            myRef.setValue(hotel_id+1);
-            finish();
+            uploadImageToStorage(mUri);
         }
     }
 
@@ -277,6 +284,7 @@ public class AddHotel extends AppCompatActivity {
         storageRef.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> {
                     Toast.makeText(AddHotel.this, "Upload image to Firebase Storage successful", Toast.LENGTH_SHORT).show();
+                    finish();
                 })
                 .addOnFailureListener(e -> {
                     // Xử lý khi tải ảnh lên thất bại
