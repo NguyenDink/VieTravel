@@ -51,8 +51,8 @@ public class Home extends AppCompatActivity {
                     mViewPager2.setCurrentItem(0);
                 } else if (id==R.id.bottom_favorite) {
                     mViewPager2.setCurrentItem(1);
-                } else if (id==R.id.bottom_schedule) {
-                    mViewPager2.setCurrentItem(2);
+//                } else if (id==R.id.bottom_schedule) {
+//                    mViewPager2.setCurrentItem(2);
                 } else if (id==R.id.bottom_booking) {
                     mViewPager2.setCurrentItem(3);
                 } else if (id==R.id.bottom_account) {
@@ -73,13 +73,13 @@ public class Home extends AppCompatActivity {
                     case 1:
                         mBottomNavigationView.getMenu().findItem(R.id.bottom_favorite).setChecked(true);
                         break;
+//                    case 2:
+//                        mBottomNavigationView.getMenu().findItem(R.id.bottom_schedule).setChecked(true);
+//                        break;
                     case 2:
-                        mBottomNavigationView.getMenu().findItem(R.id.bottom_schedule).setChecked(true);
-                        break;
-                    case 3:
                         mBottomNavigationView.getMenu().findItem(R.id.bottom_booking).setChecked(true);
                         break;
-                    case 4:
+                    case 3:
                         mBottomNavigationView.getMenu().findItem(R.id.bottom_account).setChecked(true);
                         break;
                 }

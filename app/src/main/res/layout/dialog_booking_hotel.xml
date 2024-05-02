@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textCheckInTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ngày nhận phòng"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnCheckIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textCheckInTitle"
+        android:layout_marginTop="8dp"
+        android:text="Chọn ngày check-in"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_bg_rounded"
+        app:backgroundTint="@null"
+        android:elevation="4dp"/>
+
+    <TextView
+        android:id="@+id/textCheckOutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCheckIn"
+        android:layout_marginTop="16dp"
+        android:text="Ngày trả phòng"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnCheckOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textCheckOutTitle"
+        android:layout_marginTop="8dp"
+        android:text="Chọn ngày check-out"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_bg_rounded"
+        app:backgroundTint="@null"
+        android:elevation="4dp"/>
+
+    <TextView
+        android:id="@+id/textPriceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCheckOut"
+        android:layout_marginTop="16dp"
+        android:text="Tổng"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textPriceTitle"
+        android:layout_marginTop="8dp"
+        android:hint="giá"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"/>
+
+    <Button
+        android:id="@+id/btnBookNow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtPrice"
+        android:layout_marginTop="24dp"
+        android:text="Đặt ngay"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_bg_rounded"
+        app:backgroundTint="@null"
+        android:elevation="4dp"/>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtPrice"
+        android:layout_marginTop="84dp"
+        android:text="Trở về"
+        android:textColor="@android:color/black"
+        android:background="@drawable/bg_btn"
+        app:backgroundTint="@null"
+        android:elevation="4dp"/>
+
+</RelativeLayout>

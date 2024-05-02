@@ -6,21 +6,19 @@ public class Booking {
     private int booking_id;
     private Account account;
     private Hotel hotel;
-    private Date checkIn;
-    private Date checkOut;
+    private String checkIn;
+    private String checkOut;
     private double price;
-    private Status status;
-    private int evaluate;
+    private int status_id;
 
-    public Booking(int booking_id, Account account, Hotel hotel, Date checkIn, Date checkOut, double price, Status status, int evaluate) {
+    public Booking(int booking_id, Account account, Hotel hotel, String checkIn, String checkOut, double price, int status_id) {
         this.booking_id = booking_id;
         this.account = account;
         this.hotel = hotel;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.price = price;
-        this.status = status;
-        this.evaluate = evaluate;
+        this.status_id = status_id;
     }
 
     public Booking() {
@@ -50,19 +48,19 @@ public class Booking {
         this.hotel = hotel;
     }
 
-    public Date getCheckIn() {
+    public String getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(String checkIn) {
         this.checkIn = checkIn;
     }
 
-    public Date getCheckOut() {
+    public String getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(String checkOut) {
         this.checkOut = checkOut;
     }
 
@@ -74,20 +72,11 @@ public class Booking {
         this.price = price;
     }
 
-    public Status getStatus() {
-        return status;
+    public int getStatus_id() {
+        return status_id;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus_id(int status_id) {
+        this.status_id = status_id;
     }
-
-    public int getEvaluate() {
-        return evaluate;
-    }
-
-    public void setEvaluate(int evaluate) {
-        this.evaluate = evaluate;
-    }
-
 }

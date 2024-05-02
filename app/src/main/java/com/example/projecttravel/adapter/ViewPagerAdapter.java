@@ -24,11 +24,11 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 return new HomeFragment();
             case 1:
                 return new FavoriteFragment();
+//            case 2:
+//                return new ScheduleFragment();
             case 2:
-                return new ScheduleFragment();
-            case 3:
                 return new BookingFragment();
-            case 4:
+            case 3:
                 return new AccountFragment();
             default:
                 return new HomeFragment();
@@ -37,6 +37,6 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 }

@@ -2,8 +2,10 @@ package com.example.projecttravel.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,6 +47,15 @@ public class DetailLocation extends AppCompatActivity {
     }
 
     private void initListener() {
+        lvHotel.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(DetailLocation.this, DetailHotel.class);
+                Hotel hotel = arrHotel.get(position);
+                intent.putExtra("object", hotel);
+                startActivity(intent);
+            }
+        });
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
