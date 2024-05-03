@@ -89,6 +89,7 @@
             android:drawableStart="@drawable/ic_discount"
             android:drawablePadding="10dp"
             android:text="Chương trình ưu đãi"
+            android:textColor="#817C7C"
             android:textSize="18sp" />
 
         <TextView
@@ -106,6 +107,7 @@
             android:drawableStart="@drawable/ic_contact_support"
             android:drawablePadding="10dp"
             android:text="Liên hệ Dịch vụ Khách hàng"
+            android:textColor="#817C7C"
             android:textSize="18sp" />
 
         <TextView
@@ -115,6 +117,7 @@
             android:drawableStart="@drawable/ic_security"
             android:drawablePadding="10dp"
             android:text="Trung tâm thông tin bảo mật"
+            android:textColor="#817C7C"
             android:textSize="18sp" />
 
         <TextView
@@ -124,6 +127,7 @@
             android:drawableStart="@drawable/ic_handshake"
             android:drawablePadding="10dp"
             android:text="Giải quyết tranh chấp"
+            android:textColor="#817C7C"
             android:textSize="18sp" />
 
         <TextView
@@ -160,6 +164,17 @@
             android:drawableStart="@drawable/ic_add_home"
             android:drawablePadding="10dp"
             android:text="Quản lý khách sạn"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtQuanLyBooking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:drawableStart="@drawable/ic_add_check"
+            android:drawablePadding="10dp"
+            android:textColor="#817C7C"
+            android:text="Quản lý đặt phòng"
             android:textSize="18sp" />
 
         <TextView

@@ -45,7 +45,7 @@ public class BookingDB {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Booking booking = dataSnapshot.getValue(Booking.class);
 
-                    if ((booking.getAccount().getAccount_id()).equals(account_id)) {
+                    if ((booking.getAccount().getAccount_id().toString().trim()).equals(account_id)) {
                         list.add(booking);
                     }
                 }

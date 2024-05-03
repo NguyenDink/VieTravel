@@ -85,7 +85,7 @@ public class DetailHotel extends AppCompatActivity {
             txtType.setText("Loại: Homestay");
 
         txtCapacity.setText("Tối đa: " + capacity +" (người)");
-        txtPrice.setText("Giá:" + price);
+        txtPrice.setText("Giá:" + price + "VNĐ");
         txtDescription.setText(description);
 
         StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("hotels").child(hotel_id+".jpg");
@@ -244,7 +244,7 @@ public class DetailHotel extends AppCompatActivity {
         totalPrice = diffInDays * price;
 
         // Hiển thị giá tổng mới lên TextView
-        txtTotal.setText(String.format(Locale.getDefault(), "%.2f", totalPrice));
+        txtTotal.setText(totalPrice + " VNĐ");
 
         // Cập nhật lại ngày check out
         onCheckOutDateSelected(checkOut);
@@ -268,7 +268,7 @@ public class DetailHotel extends AppCompatActivity {
             totalPrice = diffInDays * price;
 
             // Hiển thị giá tổng mới lên TextView
-            txtTotal.setText(String.format(Locale.getDefault(), "%.2f", totalPrice));
+            txtTotal.setText(totalPrice + " VNĐ");
             // Cập nhật trạng thái hợp lệ của ngày checkout
             isCheckOutValid = true;
         } else {
