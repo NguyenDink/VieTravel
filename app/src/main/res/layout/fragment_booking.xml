@@ -14,11 +14,9 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/view_pop"
+    <ListView
+        android:id="@+id/lvBooking"
         android:layout_width="match_parent"
-        android:layout_height="577dp"
-        android:clipToPadding="false"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp" />
+        android:layout_height="match_parent" />
+
 </LinearLayout>
