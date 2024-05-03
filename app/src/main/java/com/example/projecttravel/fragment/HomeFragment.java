@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projecttravel.R;
 import com.example.projecttravel.activity.ListAllLocation;
+import com.example.projecttravel.activity.LocationSearch;
 import com.example.projecttravel.adapter.LocationAdapter;
 import com.example.projecttravel.adapter.LocationTypeAdapter;
 import com.example.projecttravel.model.Location;
@@ -33,6 +37,8 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private View mView;
     private TextView txtTatCaDD;
+    private EditText edtFindLocation;
+    private ImageView btnSearch;
     private RecyclerView rViewLocation, rViewLocationType;
     private LocationAdapter locationAdapter;
     private LocationTypeAdapter locationTypeAdapter;
@@ -58,10 +64,24 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = edtFindLocation.getText().toString().trim();
+                Intent intent = new Intent(getContext(), LocationSearch.class);
+                intent.putExtra("object", text);
+                Toast.makeText(getActivity(), "Kết quả tìm kiếm cho: " + text, Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
     }
 
     public void initUI() {
         txtTatCaDD = mView.findViewById(R.id.xemTatCaDD);
+        btnSearch = mView.findViewById(R.id.btnSearch);
+        edtFindLocation = mView.findViewById(R.id.edtFindLocation);
+
 
         rViewLocation = mView.findViewById(R.id.rView_location);
         rViewLocationType = mView.findViewById(R.id.rView_LocationType);

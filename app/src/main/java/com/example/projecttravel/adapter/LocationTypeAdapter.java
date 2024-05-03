@@ -1,5 +1,6 @@
 package com.example.projecttravel.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.projecttravel.R;
+import com.example.projecttravel.activity.ListAllLocation;
 import com.example.projecttravel.model.LocationType;
 
 import java.util.List;
@@ -42,6 +44,18 @@ public class LocationTypeAdapter extends RecyclerView.Adapter<LocationTypeAdapte
                 .load(resourceId)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.imgCate);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Intent intent = new Intent(holder.itemView.getContext(), ListAllLocation.class);
+                    intent.putExtra("locationType_id", items.get(position).getLocationType_id());
+                    holder.itemView.getContext().startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override

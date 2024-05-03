@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,12 +29,15 @@ public class ListAllLocation extends AppCompatActivity {
     private ImageView btnBack;
     private List<Location> listLocation;
     private LocationAdapter locationAdapter;
+    private int selectedLocationTypeId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_all_location);
 
         initUI();
+        getIntentData(); //
         getListLocation();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +61,15 @@ public class ListAllLocation extends AppCompatActivity {
 
         btnBack = findViewById(R.id.btnBack);
     }
-    public void getListLocation() {
+
+    private void getIntentData() {
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("locationType_id")) {
+            selectedLocationTypeId = intent.getIntExtra("locationType_id", -1);
+        }
+    }
+
+    private void getListLocation() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Location");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -68,7 +80,10 @@ public class ListAllLocation extends AppCompatActivity {
                     listLocation.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Location location = dataSnapshot.getValue(Location.class);
-                    listLocation.add(location);
+                    int locationTypeId = location.getType().getLocationType_id();
+                    if (selectedLocationTypeId == -1 || locationTypeId == selectedLocationTypeId) {
+                        listLocation.add(location);
+                    }
                 }
                 locationAdapter.notifyDataSetChanged();
             }
@@ -79,4 +94,5 @@ public class ListAllLocation extends AppCompatActivity {
             }
         });
     }
+
 }

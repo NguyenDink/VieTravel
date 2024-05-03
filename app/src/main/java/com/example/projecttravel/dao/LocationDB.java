@@ -9,6 +9,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,6 +40,39 @@ public class LocationDB {
     public interface LocationCallback {
         void onLocationRetrieved(Location location);
     }
+
+    public void searchLocation(String keyword, LocationsCallback callback) {
+        List<Location> searchList = new ArrayList<>();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Location location = dataSnapshot.getValue(Location.class);
+                    if (location!=null) {
+                        String normalizedKeyword = normalizeText(keyword);
+                        String normalizedLocationName = normalizeText(location.getName());
+                        String normalizedAddress = normalizeText(location.getAddress());
+                        if (normalizedLocationName.contains(normalizedKeyword) || normalizedAddress.contains(normalizedKeyword)) {
+                            searchList.add(location);
+                        }
+                    }
+                }
+                callback.onLocationsRetrieved(searchList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private String normalizeText(String text) {
+        // Chuyển đổi về chữ thường và loại bỏ dấu
+        return Normalizer.normalize(text.toLowerCase(), Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "");
+    }
+
     public void getFavoriteLocations(final FavoriteLocationsCallback callback) {
         final List<Location> favoriteLocations = new ArrayList<>();
         final AtomicInteger count = new AtomicInteger(0);
@@ -73,6 +107,10 @@ public class LocationDB {
     // Interface để truyền danh sách các địa điểm được yêu thích
     public interface FavoriteLocationsCallback {
         void onFavoriteLocationsRetrieved(List<Location> favoriteLocations);
+    }
+
+    public interface LocationsCallback {
+        void onLocationsRetrieved(List<Location> locations);
     }
 }
 

@@ -54,9 +54,9 @@ public class Home extends AppCompatActivity {
 //                } else if (id==R.id.bottom_schedule) {
 //                    mViewPager2.setCurrentItem(2);
                 } else if (id==R.id.bottom_booking) {
-                    mViewPager2.setCurrentItem(3);
+                    mViewPager2.setCurrentItem(2);
                 } else if (id==R.id.bottom_account) {
-                    mViewPager2.setCurrentItem(4);
+                    mViewPager2.setCurrentItem(3);
                 }
                 return true;
             }
