@@ -5,20 +5,25 @@ import static android.app.PendingIntent.getActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.example.projecttravel.R;
 import com.example.projecttravel.model.Booking;
 import com.example.projecttravel.model.Hotel;
 import com.example.projecttravel.model.Status;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -69,6 +74,52 @@ public class BookingAdapter extends ArrayAdapter<Booking> {
         else
             txtName.setText("Homestay: " + booking.getHotel().getName().toString().trim());
         txtTime.setText("Nhận phòng: " + booking.getCheckIn() + " - Trả phòng: " + booking.getCheckOut());
+        if (booking.getStatus_id()==1) {
+            btnHuy.setEnabled(true);
+
+            btnHuy.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                    alertDialogBuilder.setMessage("Xác nhận hủy đặt phòng?");
+                    alertDialogBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Thực hiện cập nhật trạng thái của booking thành 2 trên Firebase Realtime Database
+                            DatabaseReference bookingRef = FirebaseDatabase.getInstance().getReference("Booking").child(String.valueOf(booking.getBooking_id()));
+                            bookingRef.child("status_id").setValue(2)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            // Cập nhật thành công
+                                            Toast.makeText(context, "Đã hủy đặt phòng", Toast.LENGTH_SHORT).show();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            // Xử lý khi cập nhật thất bại
+                                            Toast.makeText(context, "Đã xảy ra lỗi khi hủy đặt phòng", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                        }
+                    });
+                    alertDialogBuilder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
+            });
+        } else {
+            btnHuy.setEnabled(false);
+            btnHuy.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_btn));
+            btnHuy.setBackgroundTintList(null);
+            btnHuy.setTextColor(ContextCompat.getColor(context, R.color.gray));
+        }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
