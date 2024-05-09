@@ -69,6 +69,70 @@ public class BookingDB {
 
     }
 
+    public void getListBookingOwnerProcessing(ListBookingCallback callback) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String account_id = currentUser.getUid();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Booking> list = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Booking booking = dataSnapshot.getValue(Booking.class);
+
+                    if ((booking.getHotel().getOwner_id().toString().trim()).equals(account_id) && booking.getStatus_id()==1) {
+                        list.add(booking);
+                    }
+                }
+
+                Collections.sort(list, new Comparator<Booking>() {
+                    @Override
+                    public int compare(Booking booking1, Booking booking2) {
+                        return Integer.compare(booking2.getBooking_id(), booking1.getBooking_id());
+                    }
+                });
+                callback.onListBookingRetrieved(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    public void getListBookingOwnerProcessed(ListBookingCallback callback) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String account_id = currentUser.getUid();
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Booking> list = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Booking booking = dataSnapshot.getValue(Booking.class);
+
+                    if ((booking.getHotel().getOwner_id().toString().trim()).equals(account_id) && booking.getStatus_id()!=1) {
+                        list.add(booking);
+                    }
+                }
+
+                Collections.sort(list, new Comparator<Booking>() {
+                    @Override
+                    public int compare(Booking booking1, Booking booking2) {
+                        return Integer.compare(booking2.getBooking_id(), booking1.getBooking_id());
+                    }
+                });
+                callback.onListBookingRetrieved(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     public interface ListBookingCallback {
         void onListBookingRetrieved(List<Booking> booking);
     }

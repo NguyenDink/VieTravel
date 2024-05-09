@@ -17,18 +17,27 @@
         android:id="@+id/txtBookingId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#081A80"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="@color/xanh_nhat_background"
-        android:text="Mã" />
+        android:text="Mã:" />
 
     <TextView
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
+        android:textColor="#065B9E"
         android:textSize="16sp"
         android:text="Tên Khách Sạn" />
+
+    <TextView
+        android:id="@+id/txtKHName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="Tên khách hàng" />
 
     <TextView
         android:id="@+id/txtTime"
@@ -56,13 +65,23 @@
         android:paddingLeft="8dp"
         android:layout_marginBottom="5dp"/>
 
-    <Button
-        android:id="@+id/btnHuy"
-        android:layout_width="120dp"
-        android:layout_height="45dp"
-        android:layout_gravity="right"
-        android:background="@drawable/button_bg_rounded"
-        app:backgroundTint="@null"
-        android:textColor="@color/white"
-        android:text="Hủy phòng" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/spinStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnCapNhat"
+            android:layout_width="120dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_bg_rounded"
+            app:backgroundTint="@null"
+            android:textColor="@color/white"
+            android:text="Cập nhật" />
+    </LinearLayout>
 </LinearLayout>

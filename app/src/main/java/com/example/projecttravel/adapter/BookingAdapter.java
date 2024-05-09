@@ -49,6 +49,7 @@ public class BookingAdapter extends ArrayAdapter<Booking> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         convertView = context.getLayoutInflater().inflate(layoutId, null);
+        TextView txtBookingId = (TextView) convertView.findViewById(R.id.txtBookingId);
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
         TextView txtTime = (TextView) convertView.findViewById(R.id.txtTime);
         TextView txtStatus = (TextView) convertView.findViewById(R.id.txtStatus);
@@ -69,6 +70,7 @@ public class BookingAdapter extends ArrayAdapter<Booking> {
             }
         });
 
+        txtBookingId.setText("Mã: " + booking.getBooking_id());
         if (booking.getHotel().getCategory_id() == 1)
             txtName.setText("Khách sạn: " + booking.getHotel().getName().toString().trim());
         else

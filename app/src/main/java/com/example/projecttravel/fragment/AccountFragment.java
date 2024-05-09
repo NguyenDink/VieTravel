@@ -37,6 +37,7 @@ import com.example.projecttravel.activity.DetailAccount;
 import com.example.projecttravel.activity.Home;
 import com.example.projecttravel.activity.Login;
 import com.example.projecttravel.activity.MainActivity;
+import com.example.projecttravel.activity.ManageBooking;
 import com.example.projecttravel.activity.ManageHotel;
 import com.example.projecttravel.activity.UpdateAccount;
 import com.example.projecttravel.dao.AccountDB;
@@ -58,7 +59,7 @@ import com.google.firebase.storage.StorageReference;
 public class AccountFragment extends Fragment {
 
     private View mView;
-    private TextView txtLogout, txtTen, txtThongTin, txtDoiMK, txtDoiTac, txtQuanLyKS;
+    private TextView txtLogout, txtTen, txtThongTin, txtDoiMK, txtDoiTac, txtQuanLyKS, txtQuanLyBooking;
     private ImageView imgAvatar;
     AccountDB accountDB = new AccountDB();
     @Nullable
@@ -74,6 +75,24 @@ public class AccountFragment extends Fragment {
     }
 
     private void initLinsenter() {
+        txtQuanLyBooking.setOnClickListener(new View.OnClickListener() {
+            int role;
+            @Override
+            public void onClick(View v) {
+                accountDB = new AccountDB();
+                accountDB.getCurrentAccount(new AccountDB.CurrentAccountCallBack() {
+                    @Override
+                    public void onCurrentAccount(Account currentAccount) {
+                        role = currentAccount.getRole();
+                        if (role == 2) {
+                            Intent intent = new Intent(getActivity(), ManageBooking.class);
+                            startActivity(intent);
+                        } else
+                            Toast.makeText(getActivity(), "Vui lòng trở thành đối tác với VieTravel", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
         txtLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,12 +127,12 @@ public class AccountFragment extends Fragment {
                     @Override
                     public void onCurrentAccount(Account currentAccount) {
                         role = currentAccount.getRole();
+                        if (role == 2) {
+                            Toast.makeText(getActivity(), "Hiện bạn đang là đối tác với VieTravel", Toast.LENGTH_SHORT).show();
+                        } else
+                            becomePartner();
                     }
                 });
-                if (role == 2) {
-                    Toast.makeText(getActivity(), "Hiện bạn đang là đối tác với VieTravel", Toast.LENGTH_SHORT).show();
-                } else
-                    becomePartner();
             }
         });
 
@@ -126,13 +145,13 @@ public class AccountFragment extends Fragment {
                     @Override
                     public void onCurrentAccount(Account currentAccount) {
                         role = currentAccount.getRole();
+                        if (role == 2) {
+                            Intent intent = new Intent(getActivity(), ManageHotel.class);
+                            startActivity(intent);
+                        } else
+                            Toast.makeText(getActivity(), "Vui lòng trở thành đối tác với VieTravel", Toast.LENGTH_SHORT).show();
                     }
                 });
-                if (role == 2) {
-                    Intent intent = new Intent(getActivity(), ManageHotel.class);
-                    startActivity(intent);
-                } else
-                    Toast.makeText(getActivity(), "Vui lòng trở thành đối tác với VieTravel", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -144,6 +163,7 @@ public class AccountFragment extends Fragment {
         txtDoiMK = mView.findViewById(R.id.txtDoiMK);
         txtDoiTac = mView.findViewById(R.id.txtDoiTac);
         txtQuanLyKS = mView.findViewById(R.id.txtQuanLyKS);
+        txtQuanLyBooking = mView.findViewById(R.id.txtQuanLyBooking);
         imgAvatar = mView.findViewById(R.id.imgAvatar);
     }
 
